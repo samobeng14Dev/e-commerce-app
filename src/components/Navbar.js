@@ -9,6 +9,7 @@ import { useProductsContext } from "../context/products_context";
 import { useUserContext } from "../context/user_context";
 
 const Nav = () => {
+	const { openSidebar } = useProductsContext();
 	return (
 		<NavContainer>
 			<div className='nav-center'>
@@ -20,6 +21,7 @@ const Nav = () => {
 						/>
 					</Link>
 					<button
+						onClick={openSidebar}
 						type='button'
 						className='nav-toggle'>
 						<FaBars />
