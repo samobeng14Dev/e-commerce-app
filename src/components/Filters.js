@@ -52,6 +52,7 @@ const Filters = () => {
 										onClick={updateFilters}
 										type='button'
 										name='category'
+										value={category}
 										className={`${
 											category === c.toLowerCase() ? "active" : null
 										}`}>
@@ -90,7 +91,9 @@ const Filters = () => {
 								if (c == "all") {
 									return (
 										<button
+											key={index}
 											name='color'
+											value={color}
 											onClick={updateFilters}
 											data-color='all'
 											className={`${
@@ -104,6 +107,7 @@ const Filters = () => {
 									<button
 										key={index}
 										name='color'
+										value={color}
 										style={{ background: c }}
 										className={`${
 											color === c ? "color-btn active" : "color-btn"
@@ -137,6 +141,7 @@ const Filters = () => {
 						<input
 							type='checkbox'
 							name='shipping'
+							value={shipping}
 							id='shipping'
 							onChange={updateFilters}
 							checked={shipping}

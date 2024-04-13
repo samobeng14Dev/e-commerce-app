@@ -8,6 +8,7 @@ import {
 	FILTER_PRODUCTS,
 	CLEAR_FILTERS,
 } from "../actions";
+import products_reducer from "./products_reducer";
 
 const filter_reducer = (state, action) => {
 	if (action.type === LOAD_PRODUCTS) {
@@ -17,7 +18,7 @@ const filter_reducer = (state, action) => {
 			...state,
 			all_products: [...action.payload],
 			filtered_products: [...action.payload],
-			filters: { ...state, max_price: maxPrice, price: maxPrice },
+			filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
 		};
 	}
 	if (action.type === SET_GRIDVIEW) {
@@ -54,7 +55,7 @@ const filter_reducer = (state, action) => {
 		const { name, value } = action.payload;
 		return { ...state, filters: { ...state.filters, [name]: value } };
 	}
-
+	// filtering
 	if (action.type === FILTER_PRODUCTS) {
 		const { all_products } = state;
 		const {
@@ -68,13 +69,41 @@ const filter_reducer = (state, action) => {
 			shipping,
 		} = state.filters;
 		let tempProducts = [...all_products];
+		// text
 		if (text) {
 			tempProducts = tempProducts.filter((product) => {
 				return product.name.toLowerCase().startsWith(text);
 			});
 		}
+		// category
+		if (category !== "all") {
+			tempProducts = tempProducts.filter(
+				(product) => product.category === category
+			);
+		}
+		// company
+		if (company !== "all") {
+			tempProducts = tempProducts.filter(
+				(product) => product.company === company
+			);
+		}
+		// colors NB: colors is an array
+		if (color !== "all") {
+			tempProducts = tempProducts.filter((product) => {
+				return product.colors.find((c) => c === color);
+			});
+		}
+		// price
+		tempProducts = tempProducts.filter((product) => product.price <= price);
+		// shipping
+		if (shipping) {
+			tempProducts = tempProducts.filter(
+				(product) => product.shipping === true
+			);
+		}
 		return { ...state, filtered_products: tempProducts };
 	}
+	// clear filters
 	if (action.type === CLEAR_FILTERS) {
 		return {
 			...state,
