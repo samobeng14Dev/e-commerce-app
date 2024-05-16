@@ -8,7 +8,7 @@ const ProductImages = ({ images = [{ url: "" }] }) => {
 		<Wrapper>
 			<img
 				src={main.url}
-				alt='main image'
+				alt='main '
 				className='main'
 			/>
 			<div className='gallery'>
