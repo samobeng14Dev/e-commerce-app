@@ -15,6 +15,18 @@ import { useHistory } from "react-router-dom";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const CheckoutForm = () => {
+	const { cart, total_amount, shipping_fee, clearCart } = useUserContext();
+	const { myUser } = useUserContext();
+	const history = useHistory();
+	// STRIPE STUFF
+	const [succeeded, setSucceeded] = useState(false);
+	const [error, setError] = useState(null);
+	const [processing, setProcessing] = useState("");
+	const [disabled, setDisabled] = useState(true);
+	const [clientSecret, setClientSecret] = useState("");
+	const stripe = useStripe();
+	const elements = useElements();
+
 	return <h4>hello from Stripe Checkout </h4>;
 };
 
