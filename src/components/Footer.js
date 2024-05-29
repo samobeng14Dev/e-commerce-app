@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+
 const Footer = () => {
 	return (
 		<Wrapper>
 			<h5>
-				&copy;{new Date().getFullYear}
+				&copy;{new Date().getFullYear()}
 				<span> ComfySloth</span>
 			</h5>
 			<h5>All rights reserved</h5>
@@ -26,7 +27,6 @@ const Wrapper = styled.footer`
 	h5 {
 		color: var(--clr-white);
 		margin: 0.1rem;
-
 		font-weight: 400;
 		text-transform: none;
 		line-height: 1.25;
